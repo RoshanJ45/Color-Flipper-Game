@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 370px;
+        }
+        .color-box {
+            height: 150px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #61dafb;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #21a1f1;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="color-box" id="colorBox"></div>
+        <div>
+            <button class="guess-btn">Red</button>
+            <button class="guess-btn">Green</button>
+            <button class="guess-btn">Blue</button>
+            <button class="guess-btn">Yellow</button>
+        </div>
+        <div class="result" id="resultText">Guess the Color!</div>
+    </div>
+
+
+    <script>
+        const colorBox = document.getElementById('colorBox');
+        const resultText = document.getElementById('resultText');
+        const buttons = document.querySelectorAll('.guess-btn');
+
+
+        const colors = [
+            { name: 'Red', rgb: 'rgb(255, 0, 0)' },
+            { name: 'Green', rgb: 'rgb(0, 255, 0)' },
+            { name: 'Blue', rgb: 'rgb(0, 0, 255)' },
+            { name: 'Yellow', rgb: 'rgb(255, 255, 0)' }
+        ];
+
+
+        let currentColor;
+
+
+        function randomColor() {
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            currentColor = colors[randomIndex];
+            colorBox.style.backgroundColor = currentColor.rgb;
+        }
+
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.textContent === currentColor.name) {
+                    resultText.textContent = 'Correct! It\'s ' + currentColor.name;
+                } else {
+                    resultText.textContent = 'Wrong! Try again.';
+                }
+                randomColor();
+            });
+        });
+
+
+        randomColor();
+    </script>
+
+
+</body>
+</html>
